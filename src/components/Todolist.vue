@@ -35,7 +35,7 @@
           <v-spacer></v-spacer>
           <v-btn class="buttonDel" elevation="2"> Delete </v-btn>
           <v-btn class="buttonEdit" elevation="2">
-            <!-- <v-icon color="black">mdi-pencil</v-icon> -->
+            <!-- <v-icon color="black">mdi-pencil</v-icon> -->Edit
           </v-btn>
         </v-card-actions>
       </v-card>
