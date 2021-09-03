@@ -15,6 +15,12 @@ const router = new VueRouter({
       redirect: { name: "dashboardLayout" },
       component: importComponent("dashboardLayout"),
       children: [
+        {
+          path: "/",
+          name: "dashboard",
+          meta: { title: "Dashboard" },
+          component: importComponent("dashboard"),
+        },
         //To do list
         {
           path: "/todolist",
@@ -22,26 +28,20 @@ const router = new VueRouter({
           component: importComponent("todolist"),
         },
         {
-          path: "/dashboard",
-          name: "dashboard",
-          meta: { title: "Dashboard" },
-          component: importComponent("dashboard"),
+          path: "/login",
+          name: "login",
+          meta: { title: "Login" },
+          component: importComponent("login"),
+        },
+        {
+          path: "/register",
+          name: "register",
+          meta: { title: "Register" },
+          component: importComponent("register"),
         },
       ],
     },
 
-    {
-      path: "/login",
-      name: "login",
-      meta: { title: "Login" },
-      component: importComponent("login"),
-    },
-    {
-      path: "/register",
-      name: "register",
-      meta: { title: "Register" },
-      component: importComponent("register"),
-    },
     {
       path: "*",
       redirect: "/",
@@ -49,13 +49,14 @@ const router = new VueRouter({
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.name != "login" && localStorage.getItem("token") == null) {
-//     next("login");
-//   }
-//   document.title = to.meta.title;
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  // next("dashboard");
+  if (to.name != "login" && localStorage.getItem("token") == null) {
+    next("login");
+  }
+  document.title = to.meta.title;
+  next();
+});
 
 // router.beforeEach((to, from, next) => {
 // 	document.title = to.meta.title;

@@ -1,16 +1,21 @@
 <template>
-  <div style="background-color:#11698e; height:100%">
+  <div>
     <v-card
-      class="mx-auto pa-8 my-10"
+      class="mx-auto pa-8 my-16"
       elevation="24"
       outlined
       max-width="450px"
     >
+      <v-img
+        class="mx-auto mt-10"
+        :src="require('@/assets/logo.png')"
+        max-width="180"
+      />
       <v-card-text align="center">
         <p class="h1 text--primary">
           Sign In
         </p>
-        <p>Selamat Datang, Silahkan Login</p>
+        <p>Welcome, Please Sign in</p>
       </v-card-text>
       <v-form align="center" ref="form" v-model="valid" lazy-validation>
         <v-text-field
@@ -57,7 +62,7 @@ export default {
     // valid: false,
     email: "",
     password: "",
-    passwordRules: [(v) => !!v || "Password tidak boleh kosong"],
+    // passwordRules: [(v) => !!v || "Password tidak boleh kosong"],
     emailRules: [(v) => !!v || "E-mail tidak boleh kosong"],
   }),
   computed: {},
@@ -75,14 +80,9 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            localStorage.setItem("id", response.data.user.id);
-            localStorage.setItem("token", response.data.access_token);
-            localStorage.setItem("email", response.data.user.email);
-            localStorage.setItem("role", response.data.user.id_role);
-            localStorage.setItem(
-              "nama_karyawan",
-              response.data.user.nama_karyawan
-            );
+            // localStorage.setItem("id", response.data.user.id);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("email", this.email);
 
             this.$router.replace("/");
             console.table(response);

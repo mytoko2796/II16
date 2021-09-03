@@ -1,10 +1,11 @@
 <template>
-  <div class="dashboardUser" style="background-color:#053742;">
+  <div class="dashboardUser">
     <v-parallax
-      src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=966&q=80"
-      height="100%"
+      :src="require('@/assets/background.png')"
+      height="auto"
+      width="50%"
     >
-      <v-app-bar app fixed height="60px" color="transparent">
+      <v-app-bar app height="60px" color="rgb(255, 255, 255, 0.6)">
         <v-img
           class="mr-3"
           :src="require('@/assets/logo.png')"
@@ -18,9 +19,9 @@
           <v-btn text router to="/todolist"> To Do List </v-btn>
           <v-btn text router to="/register"> Register </v-btn>
           <v-btn text router to="/login"> Login </v-btn>
-          <!-- <v-btn text router @click="logout">
-          <v-icon>{{ loggedIn ? "mdi-logout" : "mdi-login" }}</v-icon>
-        </v-btn> -->
+          <v-btn text router @click="logout" v-if="loggedIn">
+            <v-icon>{{ loggedIn ? "mdi-logout" : "mdi-login" }}</v-icon>
+          </v-btn>
         </v-toolbar-items>
       </v-app-bar>
       <div class="fullheight pa-5">
@@ -55,40 +56,40 @@ export default {
     };
   },
 
-  // methods: {
-  // 	logout() {
-  // 		if (this.loggedIn) {
-  // 			var url = this.$api + "/logout";
-  // 			this.$http
-  // 				.get(url, {
-  // 					headers: {
-  // 						Authorization: "Bearer " + localStorage.getItem("token"),
-  // 					},
-  // 				})
-  // 				.then((response) => {
-  // 					this.error_message = response.data.message;
-  // 					this.color = "green";
-  // 					this.snackbar = true;
-  // 					this.load = false;
-  // 					localStorage.removeItem("id");
-  // 					localStorage.removeItem("token");
-  // 					localStorage.removeItem("email");
-  // 					location.reload();
-  // 				})
-  // 				.catch((error) => {
-  // 					this.error_message = error.response.data.message;
-  // 					this.color = "red";
-  // 					this.snackbar = true;
-  // 					this.load = false;
-  // 				});
-  // 		} else this.$router.push("/login");
-  // 	},
-  // },
-  // computed: {
-  // 	loggedIn() {
-  // 		return localStorage.getItem("token") != null;
-  // 	},
-  // },
+  methods: {
+    logout() {
+      if (this.loggedIn) {
+        var url = this.$api + "/logout";
+        this.$http
+          .get(url, {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          })
+          .then((response) => {
+            this.error_message = response.data.message;
+            this.color = "green";
+            this.snackbar = true;
+            this.load = false;
+            localStorage.removeItem("id");
+            localStorage.removeItem("token");
+            localStorage.removeItem("email");
+            location.reload();
+          })
+          .catch((error) => {
+            this.error_message = error.response.data.message;
+            this.color = "red";
+            this.snackbar = true;
+            this.load = false;
+          });
+      } else this.$router.push("/login");
+    },
+  },
+  computed: {
+    loggedIn() {
+      return localStorage.getItem("token") != null;
+    },
+  },
 };
 </script>
 

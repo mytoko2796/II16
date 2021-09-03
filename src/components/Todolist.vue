@@ -6,7 +6,7 @@
       max-width="200px"
       color="rgb(255, 179, 68, 0.4)"
     >
-      <h3 class="headline white--text">TO DO LIST</h3>
+      <h3 class="headline black--text">TO DO LIST</h3>
     </v-card>
 
     <v-btn
